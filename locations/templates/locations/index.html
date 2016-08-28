@@ -1,9 +1,16 @@
 {% if movie_list %}
     <ul>
     {% for movie in movie_list %}
-        <li><a href="/locations/{{movie.id}}/">{{ movie.title }}</a></li>
+        <li><a href="/location_list?id={{movie.id}}/">{{ movie.title }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
     <p>No movie shot here.</p>
 {% endif %}
+<!-- 
+<form action="/location/" method="post">
+    <label for="movie">Enter movie name </label>
+    <input id="movie" type="text" name="movie" value="{{ movie_name }}">
+    <input type="submit" value="OK">
+</form>
+ -->
