@@ -1,5 +1,7 @@
 from django.http import HttpResponse
-
+from locations.models import Location, Movie
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the locations index.")
+    movie_list = Movie.objects.order_by('title')
+    output = '<li>'.join([m.title for m in movie_list])
+    return HttpResponse(output)
