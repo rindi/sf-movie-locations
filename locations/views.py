@@ -16,7 +16,7 @@ def location_list(request):
         'locations': locations
         }
         # print movie.title
-        # print locations[0].locations
+        print locations.count()
     except Movie.DoesNotExist:
         raise Http404("Movie does not exist")
     return render(request, 'locations/detail.html', context)
