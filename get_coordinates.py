@@ -7,7 +7,7 @@ with open('Film_Locations_in_San_Francisco.csv', 'rU') as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
         movie_location = row['Locations']
-        location = geolocator.geocode(movie_location+" San Francisco")
+        location = geolocator.geocode(movie_location + " San Francisco")
         break
         # print(location.address)
         # print((location.latitude, location.longitude))

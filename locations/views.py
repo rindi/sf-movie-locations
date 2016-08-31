@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from .forms import MovieForm
 
 def location_list(request):
-    movie_id = request.GET.get('id')
+    movie_id = request.GET.get('id').replace("/", "")
     print movie_id
     try:
         movie = Movie.objects.filter(id=movie_id).first()
