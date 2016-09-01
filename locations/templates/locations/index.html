@@ -1,16 +1,57 @@
-{% if movie_list %}
-    <ul>
-    {% for movie in movie_list %}
-        <li><a href="/location_list?id={{movie.id}}/">{{ movie.title }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No movie shot here.</p>
-{% endif %}
-<!-- 
-<form action="/location/" method="post">
-    <label for="movie">Enter movie name </label>
-    <input id="movie" type="text" name="movie" value="{{ movie_name }}">
-    <input type="submit" value="OK">
-</form>
- -->
+<html>
+<head>
+	<title> San Francisco Movie Locations</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+<script type="text/javascript"> 
+   var movieNames = [];
+</script>
+<body>
+	<div class="container">
+		<div class="page-header">
+			<h1>Movie Locations in San Francisco</h1>
+		</div>
+	</div>
+
+	<div class="container">
+		<form id="movie-form">
+			<input name="movie_name" class="form-control" id="movie-name">
+			<input type="button" onclick="submitName()" value="Submit">
+		</form>
+	</div>
+	<div class="container" id = "movie-list">
+		<ul>
+			{% if movie_list %}
+			<ul>
+				{% for movie in movie_list %}
+				<li><a href="/location_list?id={{movie.id}}/">{{ movie.title }}</a>
+				<script type="text/javascript">
+					movieNames.push({
+					    key:   "{{movie.id|safe}}",
+					    value: "{{movie.title|safe}}"
+					});
+				</script></li>
+				{% endfor %}
+			</ul>
+			{% else %}
+			<p>No movie shot here.</p>
+			{% endif %}
+		</ul>
+	</div>
+</body>
+<script type="text/javascript">
+	$( function() {
+		$( "#movie-name" ).autocomplete({
+			source: movieNames
+		});
+	} );
+	function submitName() {
+	console.log(document.getElementById("movie-form"));
+    document.getElementById("movie-form").submit();
+	}
+</script>
+</script>
+</html>
