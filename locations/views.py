@@ -15,14 +15,18 @@ def location_list(request):
             movie = Movie.objects.filter(id=movie_id).first()
     except AttributeError:
         raise Http404("Movie does not exist")
+    gmap = "https://maps.googleapis.com/maps/api/staticmap?center=San+Francisco&zoom=12&scale=false&size=900x600&format=png&visual_refresh=true&markers=size:mid%7Ccolor:red"
+    markerlocs = ""
     try:
         locations = Location.objects.filter(movie=movie)
+        for location in locations:
+            markerlocs += "%7C" + location.locations
+        print gmap + (markerlocs.replace(" ","+"))
         context = {
         'movie': movie,
-        'locations': locations
+        'locations': locations,
+        'maps': gmap + markerlocs
         }
-        # print movie.title
-        print locations.count()
     except Movie.DoesNotExist:
         raise Http404("Movie does not exist")
     return render(request, 'locations/detail.html', context)
