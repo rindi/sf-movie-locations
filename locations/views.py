@@ -6,10 +6,16 @@ from django.http import HttpResponseRedirect
 from .forms import MovieForm
 
 def location_list(request):
-    movie_id = request.GET.get('id').replace("/", "")
-    print movie_id
     try:
-        movie = Movie.objects.filter(id=movie_id).first()
+        if(request.GET.get('movie_name')):
+            movie_name = request.GET.get('movie_name')
+            movie = Movie.objects.filter(title=movie_name).first()
+        if(request.GET.get('id')):
+            movie_id = request.GET.get('id').replace("/", "")
+            movie = Movie.objects.filter(id=movie_id).first()
+    except AttributeError:
+        raise Http404("Movie does not exist")
+    try:
         locations = Location.objects.filter(movie=movie)
         context = {
         'movie': movie,

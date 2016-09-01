@@ -17,9 +17,9 @@
 	</div>
 
 	<div class="container">
-		<form id="movie-form">
+		<form id="movie-form" action = "/location_list">
 			<input name="movie_name" class="form-control" id="movie-name">
-			<input type="button" onclick="submitName()" value="Submit">
+			<input type="button" onclick="submitName();" value="Search">
 		</form>
 	</div>
 	<div class="container" id = "movie-list">
@@ -27,7 +27,7 @@
 			{% if movie_list %}
 			<ul>
 				{% for movie in movie_list %}
-				<li><a href="/location_list?id={{movie.id}}/">{{ movie.title }}</a>
+				<!-- <li><a href="/location_list?id={{movie.id}}/">{{ movie.title }}</a> -->
 				<script type="text/javascript">
 					movieNames.push({
 					    key:   "{{movie.id|safe}}",
@@ -49,7 +49,8 @@
 		});
 	} );
 	function submitName() {
-	console.log(document.getElementById("movie-form"));
+	var help = document.getElementById("movie-form");
+	console.log(help);
     document.getElementById("movie-form").submit();
 	}
 </script>
