@@ -20,7 +20,7 @@ def location_list(request):
     try:
         locations = Location.objects.filter(movie=movie)
         for location in locations:
-            markerlocs += "%7C" + location.locations
+            markerlocs += "%7C" + location.locations + ",+San+Francisco"
         print gmap + (markerlocs.replace(" ","+"))
         context = {
         'movie': movie,
