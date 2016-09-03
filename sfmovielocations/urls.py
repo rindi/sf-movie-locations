@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^movies/', include('locations.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^location', include('locations.urls')),
+    url(r'^', include('locations.urls')),
 ]
