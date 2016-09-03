@@ -85,7 +85,7 @@ DATABASES = {
     # },
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'movielocations',
+        'NAME': 'serene-retreat-88981',
         'USER': 'ldazpwgyltajgi',
         'PASSWORD': 'DVBBqfdtYWNQtQQfoTPq4HoDOt',
         'HOST': 'ec2-54-225-72-148.compute-1.amazonaws.com',
