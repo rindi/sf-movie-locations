@@ -4,11 +4,13 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from .forms import MovieForm
+import requests
 
 def location_list(request):
     try:
         if(request.GET.get('movie_name')):
             movie_name = request.GET.get('movie_name')
+            movie_info = requests.get("http://www.omdbapi.com/?t="+movie_name+"&plot=short&r=json")
             movie = Movie.objects.filter(title=movie_name).first()
         if(request.GET.get('id')):
             movie_id = request.GET.get('id').replace("/", "")
@@ -23,6 +25,7 @@ def location_list(request):
             markerlocs += "%7C" + location.locations + ",+San+Francisco"
         context = {
         'movie': movie,
+        'movie_info': movie_info.content,
         'locations': locations,
         'maps': gmap + markerlocs
         }
