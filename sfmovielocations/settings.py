@@ -75,12 +75,20 @@ WSGI_APPLICATION = 'sfmovielocations.wsgi.application'
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'movielocations',
+    #     'USER': 'rushabindi',
+    #     'PASSWORD': 'password',
+    #     'HOST': 'localhost',
+    #     'PORT': '5432',
+    # },
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'movielocations',
-        'USER': 'rushabindi',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
+        'USER': 'ldazpwgyltajgi',
+        'PASSWORD': 'DVBBqfdtYWNQtQQfoTPq4HoDOt',
+        'HOST': 'ec2-54-225-72-148.compute-1.amazonaws.com',
         'PORT': '5432',
     }
     # 'default': {
