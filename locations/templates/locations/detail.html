@@ -9,9 +9,12 @@
         <div class="container">
           <div class="page-header">
             <h1 style="display:inline;">{{ movie.title }}</h1>
+            <h4 style="display:inline;" id="release-year"></h4>
             <a id="imdb-link">IMDb</a>
             <script type="text/javascript">
             document.getElementById("imdb-link").href = "https://www.imdb.com/title/" + movieInfo.imdbID;
+            console.log(movieInfo.Year);
+            document.getElementById("release-year").innerHTML = movieInfo.Year;
             </script>
             
         </div>
@@ -26,7 +29,11 @@
         <ul>
             {% for location in locations %}
             {% if location.locations %}
-            <li>{{ location.locations }}</a></li>
+                {% if location.fun_facts %}
+                <li>{{ location.locations }} - {{ location.fun_facts }}</li>
+                {% else %}
+                <li>{{ location.locations }}</li>
+                {% endif %}
             {% else %}
             <p>Sorry, we dont have a specific address for this movie.</p>
             {% endif %}

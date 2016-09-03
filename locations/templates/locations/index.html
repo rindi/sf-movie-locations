@@ -27,6 +27,13 @@
 		</div>
 	</div>
 
+
+	<div class="container"> 
+	<br/>
+	<br/>
+	<p>This is a website listing filming locations of movies shot in San Francisco, right from the 1920's!</p>
+	</div>
+	
 	<form id="movie-form" action = "/location_list" >
 		<div class="form-group col-md-9 col-centered">
 			<div class="form-group col-md-8">
@@ -38,7 +45,7 @@
 			
 		</div>
 	</form>
-	
+
 	<div class="container" id = "movie-list">
 		<ul>
 			{% if movie_list %}
@@ -59,6 +66,12 @@
 		</ul>
 	</div>
 </body>
+<footer>
+<br/>
+	Data Provided By - San Francisco Film Commission
+	<br/>
+	Website designed and developed by Rushab Indi.
+</footer>
 <script type="text/javascript">
 	$( function() {
 		$( "#movie-name" ).autocomplete({
@@ -68,6 +81,5 @@
 	function submitName() {
 	document.getElementById("movie-form").submit();
 	}
-</script>
 </script>
 </html>
