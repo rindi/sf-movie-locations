@@ -1,77 +1,120 @@
-<html>
+<html lang="en">
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
 	<title> San Francisco Movie Locations</title>
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<style>
-.col-centered{
-    float: none;
-    margin: 0 auto;
-}
-.float-right{
-    float: right;
-    margin: 0 auto;
-}
-</style>
+	<style>
+		* {
+			margin: 0;
+		}
+
+		html, body {
+			height: 100%;
+		}
+		.wrapper {
+			min-height: 100%;
+			height: auto !important;
+			height: 100%;
+			margin: 0 auto -30px; /* the bottom margin is the negative value of the footer's height */
+		}
+		.footer, .push {
+			height: 30px; /* .push must be the same height as .footer */
+		}
+
+		.col-centered{
+			float: none;
+			margin: 0 auto;
+		}
+		.float-right{
+			float: right;
+			margin: 0 auto;
+		}
+		body {
+			background: url(https://static.pexels.com/photos/24584/pexels-photo-24584.jpg)  no-repeat center center fixed;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+
+		}
+	</style>
 </head>
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-
 <script type="text/javascript"> 
-   var movieNames = [];
+	var movieNames = [];
+	var currentBackground = 0;
+	var backgrounds = [];
+	backgrounds[0] = 'https://static.pexels.com/photos/24584/pexels-photo-24584.jpg';
+	backgrounds[1] = 'https://farm4.staticflickr.com/3032/2983607115_e3bb48dc00_b.jpg';
+	backgrounds[2] = 'https://static.pexels.com/photos/25227/pexels-photo-25227.jpg';
+
+	function changeBackground() {
+		currentBackground++;
+		if(currentBackground > 2)
+			currentBackground = 0;
+
+		$('body').fadeOut(0,function() {
+			$('body').css({
+				'background-image' : "url('" + backgrounds[currentBackground] + "')"
+			});
+			$('body').fadeIn(0);
+		});
+		setTimeout(changeBackground, 5000);
+	}
+
+	$(document).ready(function() {
+		setTimeout(changeBackground, 5000);        
+	});
 </script>
 <body>
-	<div class="container">
-		<div class="page-header">
-			<h1>Movie Locations in San Francisco</h1>
+	<div class="wrapper">
+		<div class="container jumbotron text-center" style="background-color:transparent !important;">
+			<h1 style="color:white;">Movies shot in San Francisco</h1>
+			<p style="color:white;">This is a website listing filming locations of movies shot in The City, right from the 1920's!</p> 
 		</div>
-	</div>
 
-
-	<div class="container"> 
-	<br/>
-	<br/>
-	<p>This is a website listing filming locations of movies shot in San Francisco, right from the 1920's!</p>
-	</div>
-	
-	<form id="movie-form" action = "/location_list" >
-		<div class="form-group col-md-9 col-centered">
-			<div class="form-group col-md-8">
-				<input name="movie_name" class="form-control" id="movie-name" placeholder="Movie Name">
+		<form id="movie-form" action = "/location_list" >
+			<div class="form-group col-md-12 col-centered">
+				<div class="form-group col-md-9">
+					<input name="movie_name" class="form-control" id="movie-name" placeholder="Enter a movie Name">
+				</div>
+				<div class="form-group col-md-1">
+					<button type="submit" onclick="submitName();" class="btn btn-default float-right">Search <span class="glyphicon glyphicon-search"></span></button>
+				</div>
 			</div>
-			<div class="form-group col-md-1">
-				<button type="submit" onclick="submitName();" class="btn btn-default float-right">Search <span class="glyphicon glyphicon-search"></span></button>
-			</div>
-			
-		</div>
-	</form>
+		</form>
 
-	<div class="container" id = "movie-list">
-		<ul>
-			{% if movie_list %}
+		<div class="container" id = "movie-list">
 			<ul>
-				{% for movie in movie_list %}
-				<!-- <li><a href="/location_list?id={{movie.id}}/">{{ movie.title }}</a> -->
-				<script type="text/javascript">
-					movieNames.push({
-					    key:   "{{movie.id|safe}}",
-					    value: "{{movie.title|safe}}"
-					});
-				</script></li>
-				{% endfor %}
+				{% if movie_list %}
+				<ul>
+					{% for movie in movie_list %}
+					<!-- <li><a href="/location_list?id={{movie.id}}/">{{ movie.title }}</a> -->
+					<script type="text/javascript">
+						movieNames.push({
+							key:   "{{movie.id|safe}}",
+							value: "{{movie.title|safe}}"
+						});
+					</script></li>
+					{% endfor %}
+				</ul>
+				{% else %}
+				<p>No movie shot here.</p>
+				{% endif %}
 			</ul>
-			{% else %}
-			<p>No movie shot here.</p>
-			{% endif %}
-		</ul>
+		</div>
+	</div>
+
+	<div class="footer">
+		<div class="container">
+			<p class="text-muted credit" style="color:gold;">Data Provided By - San Francisco Film Commission. Website designed and developed by <a href="http://rushab.me">Rushab Indi</a></p>
+		</div>
 	</div>
 </body>
-<footer>
-<br/>
-	Data Provided By - San Francisco Film Commission
-	<br/>
-	Website designed and developed by Rushab Indi.
-</footer>
+
 <script type="text/javascript">
 	$( function() {
 		$( "#movie-name" ).autocomplete({
@@ -79,7 +122,7 @@
 		});
 	} );
 	function submitName() {
-	document.getElementById("movie-form").submit();
+		document.getElementById("movie-form").submit();
 	}
 </script>
 </html>
