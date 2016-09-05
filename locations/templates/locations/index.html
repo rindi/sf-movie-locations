@@ -2,72 +2,17 @@
 <head>
 	<script   src="https://code.jquery.com/jquery-1.9.1.min.js"   integrity="sha256-wS9gmOZBqsqWxgIVgA8Y9WcQOa7PgSIX+rPA0VL2rbQ="   crossorigin="anonymous"></script>
 	<script   src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"   integrity="sha256-lnH4vnCtlKU2LmD0ZW1dU7ohTTKrcKP50WA9fa350cE="   crossorigin="anonymous"></script>
+	<script src="../static/index.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<title> San Francisco Movie Locations</title>
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<style>
-		* {
-			margin: 0;
-		}
-
-		html, body {
-			height: 100%;
-		}
-		.wrapper {
-			min-height: 100%;
-			height: auto !important;
-			height: 100%;
-			margin: 0 auto -30px; /* the bottom margin is the negative value of the footer's height */
-		}
-		.footer, .push {
-			height: 30px; /* .push must be the same height as .footer */
-		}
-
-		.col-centered{
-			float: none;
-			margin: 0 auto;
-		}
-		.float-right{
-			float: right;
-			margin: 0 auto;
-		}
-		body {
-			background: url(../static/bg1.jpg)  no-repeat center center fixed;
-			-webkit-background-size: cover;
-			-moz-background-size: cover;
-			-o-background-size: cover;
-			background-size: cover;
-
-		}
-	</style>
+	<link rel="stylesheet" href="../static/index.css"/>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	
 </head>
-<script type="text/javascript"> 
-	var movieNames = [];
-	var currentBackground = 0;
-	var backgrounds = [];
-	backgrounds[0] = "../static/bg1.jpg";
-	backgrounds[1] = "../static/bg2.jpg";
-	backgrounds[2] = "../static/bg3.jpg";
-
-	function changeBackground() {
-		currentBackground++;
-		if(currentBackground > 2)
-			currentBackground = 0;
-
-		$('body').fadeOut(0,function() {
-			$('body').css({
-				'background-image' : "url('" + backgrounds[currentBackground] + "')"
-			});
-			$('body').fadeIn(0);
-		});
-		setTimeout(changeBackground, 5000);
-	}
-
-	$(document).ready(function() {
-		setTimeout(changeBackground, 5000);        
-	});
+<script type="text/javascript">
+var movieNames = [];
 </script>
 <body>
 	<div class="wrapper">
@@ -92,7 +37,6 @@
 				{% if movie_list %}
 				<ul>
 					{% for movie in movie_list %}
-					<!-- <li><a href="/location_list?id={{movie.id}}/">{{ movie.title }}</a> -->
 					<script type="text/javascript">
 						movieNames.push({
 							key:   "{{movie.id|safe}}",
@@ -115,14 +59,4 @@
 	</div>
 </body>
 
-<script type="text/javascript">
-	$( function() {
-		$( "#movie-name").autocomplete({
-			source: movieNames
-		});
-	} );
-	function submitName() {
-		document.getElementById("movie-form").submit();
-	}
-</script>
 </html>
