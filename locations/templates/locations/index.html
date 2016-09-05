@@ -32,7 +32,7 @@
 			margin: 0 auto;
 		}
 		body {
-			background: url(https://static.pexels.com/photos/24584/pexels-photo-24584.jpg)  no-repeat center center fixed;
+			background: url(../static/bg1.jpg)  no-repeat center center fixed;
 			-webkit-background-size: cover;
 			-moz-background-size: cover;
 			-o-background-size: cover;
@@ -47,9 +47,9 @@
 	var movieNames = [];
 	var currentBackground = 0;
 	var backgrounds = [];
-	backgrounds[0] = 'https://static.pexels.com/photos/24584/pexels-photo-24584.jpg';
-	backgrounds[1] = 'https://farm4.staticflickr.com/3032/2983607115_e3bb48dc00_b.jpg';
-	backgrounds[2] = 'https://static.pexels.com/photos/25227/pexels-photo-25227.jpg';
+	backgrounds[0] = "../static/bg1.jpg";
+	backgrounds[1] = "../static/bg2.jpg";
+	backgrounds[2] = "../static/bg3.jpg";
 
 	function changeBackground() {
 		currentBackground++;
@@ -77,11 +77,11 @@
 		</div>
 
 		<form id="movie-form" action = "/location_list" >
-			<div class="form-group col-md-12 col-centered">
-				<div class="form-group col-md-9">
+			<div class="form-group col-md-6 col-centered">
+				<div class="form-group col-md-10 col-centered" style="display:inline-block; vertical-align: bottom;">
 					<input name="movie_name" class="form-control" id="movie-name" placeholder="Enter a movie Name">
 				</div>
-				<div class="form-group col-md-1">
+				<div class="form-group col-md-1 col-centered" style="display:inline-block; vertical-align: bottom;">
 					<button type="submit" onclick="submitName();" class="btn btn-default float-right">Search <span class="glyphicon glyphicon-search"></span></button>
 				</div>
 			</div>

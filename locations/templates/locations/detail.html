@@ -4,27 +4,45 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"></head>
     <script type="text/javascript">
         var movieInfo = {{movie_info|safe}};
+        console.log(movieInfo);
     </script>
+    <style type="text/css">
+        body {
+    background-color: #0e1717;
+    color: #fff;
+    }
+    .col-centered{
+            float: none;
+            margin: 0 auto;
+        }
+        
+    </style>
     <body>
         <div class="container">
           <div class="page-header">
             <h1 style="display:inline;">{{ movie.title }}</h1>
             <h4 style="display:inline;" id="release-year"></h4>
             <a id="imdb-link">IMDb</a>
-            <script type="text/javascript">
-            document.getElementById("imdb-link").href = "https://www.imdb.com/title/" + movieInfo.imdbID;
-            console.log(movieInfo.Year);
-            document.getElementById("release-year").innerHTML = movieInfo.Year;
-            </script>
-            
         </div>
     </div>
 
     <div class="container">
-    
+        <div class="col-md-12">
+        <h5 style="display:inline;" >Plot: </h5><p style="display:inline;" id="plot"></p><br/>
+        </div>
+        <div class="col-md-6">
+        <h5 style="display:inline;" >Starring: </h5> <p style="display:inline;" id="actors"></p><br/>
+        <h5 style="display:inline;" >Directed by: </h5> <p style="display:inline;" id="director"></p><br/>
+        </div>
+        <div class="col-md-6">
+        <h5 style="display:inline;" >Genre: </h5> <p style="display:inline;" id="genre"></p><br/>
+        <h5 style="display:inline;" >Language: </h5> <p style="display:inline;" id="language"></p><br/>
+        </div>
     </div>
+    
     <div class="container">
-
+        <div class="col-md-8">
+        <h5> Locations </h5>
         {% if locations %}
         <ul>
             {% for location in locations %}
@@ -44,11 +62,20 @@
             {% endif %}
         </ul>
 
+        </div>
     </div>
     <div class="container">
-    </div>
-    <div class="container">
-        <img width="900" src="{{ maps }}">
+        <img style="max-width: 100%" src="{{ maps }}">
     </div>
 </body>
+<script type="text/javascript">
+document.getElementById("imdb-link").href = "https://www.imdb.com/title/" + movieInfo.imdbID;
+document.getElementById("release-year").innerHTML = movieInfo.Year;
+document.getElementById("actors").innerHTML = movieInfo.Actors;
+document.getElementById("director").innerHTML = movieInfo.Director;
+document.getElementById("genre").innerHTML = movieInfo.Genre;
+document.getElementById("language").innerHTML = movieInfo.Language;
+document.getElementById("plot").innerHTML = movieInfo.Plot;
+document.getElementById("poster").href = movieInfo.Poster;
+</script>
 </html>
