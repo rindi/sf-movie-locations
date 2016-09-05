@@ -7,6 +7,7 @@ from .forms import MovieForm
 import requests
 
 def location_list(request):
+    api_key = "AIzaSyAh_YhNkMbG4nWX282UnkTTzerSM6z830U"
     try:
         if(request.GET.get('movie_name')):
             movie_name = request.GET.get('movie_name')
@@ -27,7 +28,7 @@ def location_list(request):
         'movie': movie,
         'movie_info': movie_info.content,
         'locations': locations,
-        'maps': gmap + markerlocs
+        'maps': gmap + markerlocs + "&key=" + api_key
         }
     except Movie.DoesNotExist:
         raise Http404("Movie does not exist")
