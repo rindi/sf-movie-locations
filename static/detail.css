@@ -1,0 +1,12 @@
+ body {
+    background-color: #0e1717;
+    color: #fff;
+    }
+    .col-centered{
+            float: none;
+            margin: 0 auto;
+        }
+        
+    .hide {    
+        display:none;
+    }

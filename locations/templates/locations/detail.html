@@ -1,26 +1,12 @@
 <html>
 <head>
     <title>{{ movie.title }} Locations</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"></head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/detail.css"></head>
     <script   src="https://code.jquery.com/jquery-1.9.1.min.js"   integrity="sha256-wS9gmOZBqsqWxgIVgA8Y9WcQOa7PgSIX+rPA0VL2rbQ="   crossorigin="anonymous"></script>
     <script type="text/javascript">
         var movieInfo = {{movie_info|safe}};
-        console.log(movieInfo);
     </script>
-    <style type="text/css">
-        body {
-    background-color: #0e1717;
-    color: #fff;
-    }
-    .col-centered{
-            float: none;
-            margin: 0 auto;
-        }
-        
-    .hide {    
-        display:none;
-    }
-    </style>
     <body>
         <div class="container">
           <div class="page-header">
@@ -32,43 +18,43 @@
 
     <div class="container" id = "movie-info">
         <div class="col-md-12">
-        <h5 style="display:inline;" >Plot: </h5><p style="display:inline;" id="plot"></p><br/>
+            <h5 style="display:inline;" >Plot: </h5><p style="display:inline;" id="plot"></p><br/>
         </div>
         <div class="col-md-6">
-        <h5 style="display:inline;" >Starring: </h5> <p style="display:inline;" id="actors"></p><br/>
-        <h5 style="display:inline;" >Directed by: </h5> <p style="display:inline;" id="director"></p><br/>
+            <h5 style="display:inline;" >Starring: </h5> <p style="display:inline;" id="actors"></p><br/>
+            <h5 style="display:inline;" >Directed by: </h5> <p style="display:inline;" id="director"></p><br/>
         </div>
         <div class="col-md-6">
-        <h5 style="display:inline;" >Genre: </h5> <p style="display:inline;" id="genre"></p><br/>
-        <h5 style="display:inline;" >Language: </h5> <p style="display:inline;" id="language"></p><br/>
+            <h5 style="display:inline;" >Genre: </h5> <p style="display:inline;" id="genre"></p><br/>
+            <h5 style="display:inline;" >Language: </h5> <p style="display:inline;" id="language"></p><br/>
         </div>
     </div>
     
     <div class="container">
         <div class="col-md-8">
-        {% if movie.title %}
-        <h5> Locations </h5>
-        {% if locations %}
-        <ul>
-            {% for location in locations %}
-            {% if location.locations %}
+            {% if movie.title %}
+            <h5> Locations </h5>
+            {% if locations %}
+            <ul>
+                {% for location in locations %}
+                {% if location.locations %}
                 {% if location.fun_facts %}
                 <li>{{ location.locations }} - {{ location.fun_facts }}</li>
                 {% else %}
                 <li>{{ location.locations }}</li>
                 {% endif %}
-            {% else %}
-            <p>Sorry, we dont have a specific address for this movie.</p>
-            {% endif %}
+                {% else %}
+                <p>Sorry, we dont have a specific address for this movie.</p>
+                {% endif %}
 
-            {% endfor %}
+                {% endfor %}
+                {% else %}
+                <p>Sorry, we dont have a specific address for this movie.</p>
+                {% endif %}
+            </ul>
             {% else %}
-            <p>Sorry, we dont have a specific address for this movie.</p>
+            <h5>Sorry, we dont have this movie listed on our database!</h5>
             {% endif %}
-        </ul>
-        {% else %}
-        <h5>Sorry, we dont have this movie listed on our database!</h5>
-        {% endif %}
 
         </div>
     </div>
@@ -77,21 +63,22 @@
     </div>
 </body>
 <script type="text/javascript">
-if(movieInfo.Response!="False")
-{document.getElementById("imdb-link").href = "https://www.imdb.com/title/" + movieInfo.imdbID;
-document.getElementById("title").innerHTML = movieInfo.Title;
-document.getElementById("release-year").innerHTML = movieInfo.Year;
-document.getElementById("actors").innerHTML = movieInfo.Actors;
-document.getElementById("director").innerHTML = movieInfo.Director;
-document.getElementById("genre").innerHTML = movieInfo.Genre;
-document.getElementById("language").innerHTML = movieInfo.Language;
-document.getElementById("plot").innerHTML = movieInfo.Plot;
-}
-else
-{
-$("#movie-info").addClass("hide");
-$("#imdb-link").addClass("hide");
-document.getElementById("title").innerHTML = movieInfo.Error;
-}
+    if(movieInfo.Response!="False")
+        {
+            document.getElementById("imdb-link").href = "https://www.imdb.com/title/" + movieInfo.imdbID;
+            document.getElementById("title").innerHTML = movieInfo.Title;
+            document.getElementById("release-year").innerHTML = movieInfo.Year;
+            document.getElementById("actors").innerHTML = movieInfo.Actors;
+            document.getElementById("director").innerHTML = movieInfo.Director;
+            document.getElementById("genre").innerHTML = movieInfo.Genre;
+            document.getElementById("language").innerHTML = movieInfo.Language;
+            document.getElementById("plot").innerHTML = movieInfo.Plot;
+        }
+        else
+        {
+            $("#movie-info").addClass("hide");
+            $("#imdb-link").addClass("hide");
+            document.getElementById("title").innerHTML = movieInfo.Error;
+        }
 </script>
 </html>
