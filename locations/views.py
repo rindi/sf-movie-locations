@@ -28,9 +28,8 @@ def location_list(request):
         'movie': movie,
         'movie_info': movie_info.content,
         'locations': locations,
+        'maps': gmap + markerlocs + "&key=" + api_key
         }
-        if movie:
-            context.add(maps)
     except Movie.DoesNotExist:
         raise Http404("Movie does not exist")
     return render(request, 'locations/detail.html', context)
