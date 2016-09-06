@@ -1,4 +1,8 @@
 
+/**
+* jQuery Autocomplete
+*/
+
 var currentBackground = 0;
 var backgrounds = [];
 backgrounds[0] = "../static/bg1.jpg";
@@ -23,12 +27,20 @@ $(document).ready(function() {
 	setTimeout(changeBackground, 5000);        
 });
 
+/**
+* jQuery Autocomplete
+*/
+
 $( function() {
 	$( "#movie-name").autocomplete({
 		source: movieNames
 	});
 } );
 
+/**
+* Submit moviename to API after 
+* sanitizing user input
+*/
 function submitName() {
 	var submitMovieName = document.getElementById("movie-name").value;
 	submitMovieName = sanitizeString(submitMovieName);
@@ -36,9 +48,8 @@ function submitName() {
 }
 
 /**
-* Sanitizes users entered string - replaces all
+* Sanitizes user entered string - replaces all
 * special characters except comonly used
-* and performs a global, case insensitive match.
 * @param {string} stringInput
 * @return {string} stringInput
 */

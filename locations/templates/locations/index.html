@@ -1,62 +1,63 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-	<script   src="https://code.jquery.com/jquery-1.9.1.min.js"   integrity="sha256-wS9gmOZBqsqWxgIVgA8Y9WcQOa7PgSIX+rPA0VL2rbQ="   crossorigin="anonymous"></script>
-	<script   src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"   integrity="sha256-lnH4vnCtlKU2LmD0ZW1dU7ohTTKrcKP50WA9fa350cE="   crossorigin="anonymous"></script>
-	<script src="../static/index.js"></script>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<title> San Francisco Movie Locations</title>
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
-	<link rel="stylesheet" href="../static/index.css"/>
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-	
+
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js">
+    </script>
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js">
+    </script>
+    <script src="../static/index.js">
+    </script>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="description">
+    <title>San Francisco Movie Locations</title>
+    <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
+    <link href="../static/index.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="prefetch" href="../static/bg2.jpg">
+    <link rel="prefetch" href="../static/bg3.jpg">
+    <script type="text/javascript">
+    // Set movie names into an array for jQuery AutoComplete 
+    var movieNames = [];
+    </script>
 </head>
-<script type="text/javascript">
-var movieNames = [];
-</script>
-<body>
-	<div class="wrapper">
-		<div class="container jumbotron text-center" style="background-color:transparent !important;">
-			<h1 style="color:white;">Movies shot in San Francisco</h1>
-			<p style="color:white;">This is a website listing filming locations of movies shot in The City, right from the 1920's!</p> 
-		</div>
+<body style="background-color:black;">
 
-		<form id="movie-form" action = "/location_list" >
-			<div class="form-group col-md-6 col-centered">
-				<div class="form-group col-md-10 col-centered" style="display:inline-block; vertical-align: bottom;">
-					<input name="movie_name" class="form-control" id="movie-name" placeholder="Enter a movie Name">
-				</div>
-				<div class="form-group col-md-1 col-centered" style="display:inline-block; vertical-align: bottom;">
-					<button type="submit" onclick="submitName();" class="btn btn-default float-right">Search <span class="glyphicon glyphicon-search"></span></button>
-				</div>
-			</div>
-		</form>
+    <div class="wrapper">
+        <div class="container jumbotron text-center" style="background-color:transparent !important;">
+            <h1 style="color:white;">Movies shot in San Francisco</h1>
+            <p style="color:white;">This is a website listing filming locations of movies shot in The City, right from the 1920's!</p>
+        </div>
+        <div class="container">
+            <form action="/location_list" id="movie-form" name="movie-form">
+                <div class="form-search col-lg-10 col-lg-offset-1">
+                    <input class="form-control" id="movie-name" style="display:inline; " name="movie_name" placeholder="Enter a movie Name">
+                    <div class="container" id="movie-list">
+                        {% if movie_list %}
+                        <ul>
+                            <li style="list-style: none">{% for movie in movie_list %} 
+                                <script type="text/javascript">
+                                    movieNames.push({
+                                        key:   "{{movie.id|safe}}",
+                                        value: "{{movie.title|safe}}"
+                                    });
+                                </script>
+                            </li>
+                            <li style="list-style: none">{% endfor %}</li>
+                        </ul>{% else %}
+                        <p>No movie shot here.</p>{% endif %}
+                    </div>
+                    <button class="btn btn-default float-right" style="display:inline;" onclick="submitName();" type="submit">Search <span class=
+                        "glyphicon glyphicon-search"></span></button>
 
-		<div class="container" id = "movie-list">
-			<ul>
-				{% if movie_list %}
-				<ul>
-					{% for movie in movie_list %}
-					<script type="text/javascript">
-						movieNames.push({
-							key:   "{{movie.id|safe}}",
-							value: "{{movie.title|safe}}"
-						});
-					</script></li>
-					{% endfor %}
-				</ul>
-				{% else %}
-				<p>No movie shot here.</p>
-				{% endif %}
-			</ul>
-		</div>
-	</div>
-
-	<div class="footer">
-		<div class="container">
-			<p class="text-muted credit" style="color:gold;">Data Provided By - San Francisco Film Commission. Website designed and developed by <a href="http://rushab.me">Rushab Indi</a></p>
-		</div>
-	</div>
-</body>
-
-</html>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="container">
+                <p class="text-muted credit" style="color:gold;">Data Provided By - San Francisco Film Commission. Website designed and developed by <a href= "http://rushab.me">Rushab Indi</a></p>
+                </div>
+            </div>
+        </body>
+        </html>
