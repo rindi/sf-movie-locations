@@ -5,6 +5,10 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 import requests
 import yaml
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 config_file = open('static/config.yaml')
 config = yaml.load(config_file)
@@ -23,6 +27,7 @@ def location_list(request):
             movie_info = get_OMDb_info(movie_name)
             movie = Movie.objects.filter(title=movie_name).first()
     except AttributeError:
+        logger.error("Movie does not exist!")        
         raise Http404("Movie does not exist")
     try:
         locations = Location.objects.filter(movie=movie)
@@ -33,6 +38,7 @@ def location_list(request):
             'maps': static_map_link(locations)
         }
     except Movie.DoesNotExist:
+        logger.error("Movie does not exist!")        
         raise Http404("Movie does not exist")
     return render(request, 'locations/detail.html', context)
 
@@ -60,8 +66,11 @@ def index(request):
     '''
     List of all movies to show up in Autocomplete textbox
     '''
-    movie_list = Movie.objects.order_by('title')
-    context = {
-        'movie_list': movie_list,
-    }
+    try:
+        movie_list = Movie.objects.order_by('title')
+        context = {
+            'movie_list': movie_list,
+        }
+    except Exception as e:
+        logger.error("Error getting list of movie names: ", e)
     return render(request, 'locations/index.html', context)
