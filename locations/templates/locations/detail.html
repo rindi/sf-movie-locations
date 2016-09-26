@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>{{ movie.title }} Locations</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"></head>
@@ -8,30 +9,39 @@
         /*
          * Convert Django response var to JS object
          */
-
          var movieInfo = {{movie_info|safe}};
-         console.log(movieInfo);
      </script>
+     <nav class="navbar navbar-transparent">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand" href="javascript:history.back()" style="color: gold;">SF Movie Locations</a>
+        </div>
+        </div>
+        </nav>
+
+
+
      <body>
         <div class="container">
           <div class="page-header">
-            <h1 style="display:inline;" id="title"></h1>
-            <h4 style="display:inline;" id="release-year"></h4>
+            <h1 class="inliner" id="title"></h1>
+            <h4 class="inliner" id="release-year"></h4>
             <a id="imdb-link">IMDb</a>
         </div>
     </div>
 
     <div class="container" id = "movie-info">
         <div class="col-md-12">
-            <h5 style="display:inline;" >Plot: </h5><p style="display:inline;" id="plot"></p><br/>
+            <h5 class="inliner" >Plot: </h5><p class="inliner" id="plot"></p><br/>
         </div>
         <div class="col-md-6">
-            <h5 style="display:inline;" >Starring: </h5> <p style="display:inline;" id="actors"></p><br/>
-            <h5 style="display:inline;" >Directed by: </h5> <p style="display:inline;" id="director"></p><br/>
+            <h5 class="inliner" >Starring: </h5> <p class="inliner" id="actors"></p><br/>
+            <h5 class="inliner" >Directed by: </h5> <p class="inliner" id="director"></p><br/>
         </div>
         <div class="col-md-6">
-            <h5 style="display:inline;" >Genre: </h5> <p style="display:inline;" id="genre"></p><br/>
-            <h5 style="display:inline;" >Language: </h5> <p style="display:inline;" id="language"></p><br/>
+            <h5 class="inliner" >Genre: </h5> <p class="inliner" id="genre"></p><br/>
+            <h5 class="inliner" >Language: </h5> <p class="inliner" id="language"></p><br/>
         </div>
     </div>
     
@@ -73,9 +83,9 @@
 </div>
 <!-- Static Map listings markers, for now. -->
 <div class="container" id = "maps">
-    <img style="max-width: 100%" src="{{ maps }}">
+    <img style="max-width: 100%" src="{{ maps }}" alt="Locations on the map">
 </div>
-<div class="container" id = "next-steps">
+<!-- <div class="container" id = "next-steps">
     <p>
     The next steps planned for this product are 
     <ul>
@@ -85,7 +95,7 @@
     <li>UI Improvements</li>
     </ul>
     </p>
-</div>
+</div> -->
 
 </body>
 <script type="text/javascript">

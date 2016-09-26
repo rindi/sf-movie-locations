@@ -10,3 +10,11 @@ body {
     .hide {    
         display:none;
     }
+
+    .inliner {    
+        display:inline;
+    }
+
+    .navbar-inner {
+    background:transparent;
+    }
