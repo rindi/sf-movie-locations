@@ -29,6 +29,7 @@
         <div class="container">
             <form action="/location_list" id="movie-form" name="movie-form">
                 <div class="form-search col-lg-10 col-lg-offset-1">
+                    <label for="movie-name" class="hide">Enter a movie Name</label>
                     <input class="form-control inliner" id="movie-name" name="movie_name" placeholder="Enter a movie Name" aria-label="Enter a movie Name">
                     <div class="container" id="movie-list">
                         {% if movie_list %}
