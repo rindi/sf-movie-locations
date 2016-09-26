@@ -7,7 +7,7 @@ from .forms import MovieForm
 import requests
 import yaml
 
-config_file = open('config.yaml')
+config_file = open('/static/config.yaml')
 config = yaml.load(config_file)
 config_file.close()
 
